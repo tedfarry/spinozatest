@@ -1,0 +1,43 @@
+cashflowtable <- function() {
+  
+  RentAmt <- 1200
+  RentAppRate <- 3
+  ValAppRate <- 5
+  TurnTime <- 1
+  ATenStay <- 3
+  DLQ <- 1
+  PMFee <- 6
+  LC <- 50
+  InsRate <- 42
+  TurnCost <- 1.25
+  CapexMaint <- 500
+  taxrate <- 2.58
+  ppval <- 231000
+  hoamonthly <- 50
+  sqft <- 1500
+  HoldPeriod <- 10
+  RehabVal <- 1000
+  CCRate <- 3.5
+  CCval <- ppval*(CCRate/100)
+  TotInv <- ppval + RehabVal + CCval
+  SaleCC <- 6
+  
+  PropVal <- ppval*(1+(ValAppRate/100))^(0:(HoldPeriod-1))
+  
+  TitleCF <- 1 + (0:(HoldPeriod-1))
+  RentCF <- RentAmt*(1+(RentAppRate/100))^(0:(HoldPeriod-1))*12
+  VacCF <- RentCF*((TurnTime/12)/ATenStay)
+  DelCF <- RentCF*(DLQ/100)
+  GICF <- RentCF - VacCF - DelCF
+  PMFCF <- GICF*(PMFee/100)
+  LCCF <- (RentCF*(LC/100))/(ATenStay*12)
+  InsCF <- rep(((TotInv/100)*(InsRate/100)),HoldPeriod)
+  MaCeCF <- rep((((TurnCost*sqft)/ATenStay)+CapexMaint),HoldPeriod)
+  TaxCF <- ((taxrate/100)*PropVal)
+  HoaCF <- rep(hoamonthly,HoldPeriod)
+  ToteCF <- PMFCF + LCCF + InsCF + MaCeCF + TaxCF + HoaCF
+  IncCF <- GICF - ToteCF
+  
+  cflayout <- rbind(TitleCF, RentCF ,VacCF ,DelCF ,GICF ,PMFCF ,LCCF ,InsCF ,MaCeCF ,TaxCF ,HoaCF ,ToteCF ,IncCF)
+  return(cflayout)
+}
