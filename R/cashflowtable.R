@@ -38,6 +38,6 @@ cashflowtable <- function() {
   ToteCF <- PMFCF + LCCF + InsCF + MaCeCF + TaxCF + HoaCF
   IncCF <- GICF - ToteCF
   
-  cflayout <- rbind(TitleCF, RentCF ,VacCF ,DelCF ,GICF ,PMFCF ,LCCF ,InsCF ,MaCeCF ,TaxCF ,HoaCF ,ToteCF ,IncCF)
-  return(cflayout)
+  rbind(TitleCF, RentCF ,VacCF ,DelCF ,GICF ,PMFCF ,LCCF ,InsCF ,MaCeCF ,TaxCF ,HoaCF ,ToteCF ,IncCF)
+  
 }
