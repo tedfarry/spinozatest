@@ -1,7 +1,7 @@
 
 
 cashflowtable <- function() {
-library(FinCal)
+
 
 RentAmt <- 1200
 RentAppRate <- 3
