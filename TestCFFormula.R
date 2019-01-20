@@ -1,4 +1,4 @@
-library(FinCal)
+
 
 cashflowtable <- function() {
 
