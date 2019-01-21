@@ -1,2 +1,2 @@
-library(flextable)
-library(FinCal)
+install.packages("flextable")
+install.packages("FinCal")
