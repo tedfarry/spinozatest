@@ -36,7 +36,7 @@ CFReturnTable <- function(RentAmt, RentAppRate, ValAppRate, TurnTime, ATenStay, 
   colnames(cfdatatable1) <- cnames
 
 
-  regulartable(cfdatatable1)
+  png(regulartable(cfdatatable1))
 
 }
 
