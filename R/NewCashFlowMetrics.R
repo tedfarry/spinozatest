@@ -5,7 +5,6 @@ CFReturnMetrics <- function(RentAmt, RentAppRate, ValAppRate, TurnTime, ATenStay
   CCval <- ppval*(CCRate/100)
   TotInv <- ppval + RehabVal + CCval
 
-
   PropVal <- c(ppval,(ppval*(1+(DiscountToPurchase/100)))*(1+(ValAppRate/100))^(0:(HoldPeriod-1)))
   TaxVal <- c(0,(ppval*(1+(ValAppRate/100))^(0:(HoldPeriod-1))))
 
@@ -31,8 +30,7 @@ CFReturnMetrics <- function(RentAmt, RentAppRate, ValAppRate, TurnTime, ATenStay
   NetYield <- IncCF[2]/TotInv
   EquityMultiple <- sum(LevCF)/-LevCF[1]
 
-  MetricList <- 
-toJSON(list(IRR = IRR, TotalReturn = TotalReturn, GrossYield = GrossYield, NetYield = NetYield, EquityMultiple = EquityMultiple))
+  MetricList <- toJSON(list(IRR = IRR, TotalReturn = TotalReturn, GrossYield = GrossYield, NetYield = NetYield, EquityMultiple = EquityMultiple))
 
   MetricList
 }
