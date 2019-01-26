@@ -24,7 +24,7 @@ CFReturnMetrics <- function(RentAmt, RentAppRate, ValAppRate, TurnTime, ATenStay
   LoanAMT <- c(ppval*(LTV/100),fv(IntRate/1200, (1:HoldPeriod)*12, -ppval*(LTV/100), pmt(IntRate/1200, Amort*12, -ppval*(LTV/100),0)))
   LevCF <- c(-TotInv + LoanAMT[1], IncCF[2:HoldPeriod] - LoanPMT[2:HoldPeriod], (PropVal[HoldPeriod+1]*(1-(SaleCC/100)))+IncCF[(HoldPeriod+1)] - LoanPMT[(HoldPeriod+1)] - LoanAMT[(HoldPeriod+1)])
 
-  IRR <-toString(irr(LevCF))
+  IRR <-irr(LevCF)
   TotalReturn <-sum(LevCF)
   GrossYield <- (RentAmt*12)/ppval
   NetYield <- IncCF[2]/TotInv
