@@ -30,7 +30,8 @@ CFReturnMetrics <- function(RentAmt, RentAppRate, ValAppRate, TurnTime, ATenStay
   NetYield <- IncCF[2]/TotInv
   EquityMultiple <- sum(LevCF)/-LevCF[1]
 
-  MetricList <- list(IRR = IRR, TotalReturn = TotalReturn, GrossYield = GrossYield, NetYield = NetYield, EquityMultiple = EquityMultiple)
+  MetricList <- 
+toJSON(list(IRR = IRR, TotalReturn = TotalReturn, GrossYield = GrossYield, NetYield = NetYield, EquityMultiple = EquityMultiple))
 
   MetricList
 }
