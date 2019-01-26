@@ -17,7 +17,7 @@ CFReturnMetrics <- function(RentAmt, RentAppRate, ValAppRate, TurnTime, ATenStay
   InsCF <- c(0,rep(((TotInv/100)*(InsRate/100)),HoldPeriod))
   MaCeCF <- c(0,rep((((TurnCost*sqft)/ATenStay)+CapexMaint),HoldPeriod))
   TaxCF <- ((taxrate/100)*TaxVal)
-  HoaCF <- c(0,rep(hoamonthly,HoldPeriod))
+  HoaCF <- c(0,rep((hoamonthly*12),HoldPeriod))
   ToteCF <- PMFCF + LCCF + InsCF + MaCeCF + TaxCF + HoaCF
   IncCF <- GICF - ToteCF
   LoanPMT <- c(0,rep(pmt(IntRate/1200, Amort*12, -ppval*(LTV/100),0)*12,HoldPeriod))
