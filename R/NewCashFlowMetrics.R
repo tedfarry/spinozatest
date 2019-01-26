@@ -1,6 +1,6 @@
 CFReturnMetrics <- function(RentAmt, RentAppRate, ValAppRate, TurnTime, ATenStay, DLQ, PMFee, LC, InsRate, TurnCost, CapexMaint, taxrate, ppval, hoamonthly, sqft, HoldPeriod, RehabVal, CCRate, SaleCC, DiscountToPurchase, LTV, IntRate, Amort) {
   library(FinCal)
-  library(JSON)
+  library(rjson)
 
   CCval <- ppval*(CCRate/100)
   TotInv <- ppval + RehabVal + CCval
