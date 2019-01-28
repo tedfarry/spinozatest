@@ -20,8 +20,8 @@ CFReturnMetrics <- function(RentAmt, RentAppRate, ValAppRate, TurnTime, ATenStay
   HoaCF <- c(0,rep((hoamonthly*12),HoldPeriod))
   ToteCF <- PMFCF + LCCF + InsCF + MaCeCF + TaxCF + HoaCF
   IncCF <- GICF - ToteCF
-  LoanPMT <- c(0,rep(pmt(IntRate/1200, Amort*12, -ppval*(LTV/100),0)*12,HoldPeriod))
-  LoanAMT <- c(ppval*(LTV/100),fv(IntRate/1200, (1:HoldPeriod)*12, -ppval*(LTV/100), pmt(IntRate/1200, Amort*12, -ppval*(LTV/100),0)))
+  LoanPMT <- c(0,rep(pmt(IntRate/1200, Amort*12, -(ppval*(LTV/100))*(1+(Points/100)),0)*12,HoldPeriod))
+  LoanAMT <- c((ppval*(LTV/100))*(1+(Points/100)),fv(IntRate/1200, (1:HoldPeriod)*12, -(ppval*(LTV/100))*(1+(Points/100)), pmt(IntRate/1200, Amort*12, -(ppval*(LTV/100))*(1+(Points/100)),0)))
   LevCF <- c(-TotInv + LoanAMT[1], IncCF[2:HoldPeriod] - LoanPMT[2:HoldPeriod], (PropVal[HoldPeriod+1]*(1-(SaleCC/100)))+IncCF[(HoldPeriod+1)] - LoanPMT[(HoldPeriod+1)] - LoanAMT[(HoldPeriod+1)])
 
   IRR <-irr(LevCF)
