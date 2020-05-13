@@ -1,6 +1,7 @@
 CFReturnMetrics <- function(RentAmt, RentAppRate, ValAppRate, TurnTime, ATenStay, DLQ, PMFee, LC, InsRate, TurnCost, CapexMaint, taxrate, ppval, hoamonthly, sqft, HoldPeriod, RehabVal, CCRate, SaleCC, DiscountToPurchase, LTV, IntRate, Amort, Points) {
  
-  
+  install.packages("FinCal",dependencies=TRUE) # from CRAN
+  library(FinCal)
   library(rjson)
   
 
