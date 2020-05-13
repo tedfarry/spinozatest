@@ -1,3 +1,4 @@
 install.packages("flextable")
-install.packages("FinCal")
+library("devtools")
+install_github("felixfan/FinCal") # from GitHub
 install.packages("rjson")
