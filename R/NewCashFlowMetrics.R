@@ -1,5 +1,7 @@
 CFReturnMetrics <- function(RentAmt, RentAppRate, ValAppRate, TurnTime, ATenStay, DLQ, PMFee, LC, InsRate, TurnCost, CapexMaint, taxrate, ppval, hoamonthly, sqft, HoldPeriod, RehabVal, CCRate, SaleCC, DiscountToPurchase, LTV, IntRate, Amort, Points) {
  
+  library("devtools")
+  install_github("felixfan/FinCal") # from GitHub
   library(FinCal)
   library(rjson)
   
