@@ -15,7 +15,7 @@ CFReturnMetrics <- function(RentAmt, RentAppRate, ValAppRate, TurnTime, ATenStay
   DelCF <- RentCF*(DLQ/100)
   GICF <- RentCF - VacCF - DelCF
   PMFCF <- GICF*(PMFee/100)
-  LCCF <- (RentCF*(LC/100))/(ATenStay*12)
+  LCCF <- (RentCF*LC)/(ATenStay*12)
   InsCF <- c(0,rep(((TotInv/100)*(InsRate/100)),HoldPeriod))
   MaCeCF <- c(0,rep((((TurnCost*sqft)/ATenStay)+CapexMaint),HoldPeriod))
   TaxCF <- ((taxrate/100)*TaxVal)
@@ -35,4 +35,5 @@ CFReturnMetrics <- function(RentAmt, RentAppRate, ValAppRate, TurnTime, ATenStay
   MetricList <- toJSON(list(IRR = IRR, TotalReturn = TotalReturn, GrossYield = GrossYield, NetYield = NetYield, EquityMultiple = EquityMultiple))
   
   MetricList
+
 }
