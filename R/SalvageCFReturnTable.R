@@ -1,10 +1,7 @@
 CFReturnTable <- function(RentAmt, RentAppRate, ValAppRate, TurnTime, ATenStay, DLQ, PMFee, LC, InsRate, TurnCost, CapexMaint, taxrate, ppval, hoamonthly, sqft, HoldPeriod, RehabVal, CCRate, SaleCC, DiscountToPurchase, LTV, IntRate, Amort, Points) {
-  library(FinCal)
-  library(flextable)
   
   CCval <- ppval*(CCRate/100)
   TotInv <- ppval + RehabVal + CCval
-  
   
   PropVal <- c(ppval,(ppval*(1+(DiscountToPurchase/100)))*(1+(ValAppRate/100))^(0:(HoldPeriod-1)))
   TaxVal <- c(0,(ppval*(1+(ValAppRate/100))^(0:(HoldPeriod-1))))
@@ -21,8 +18,8 @@ CFReturnTable <- function(RentAmt, RentAppRate, ValAppRate, TurnTime, ATenStay, 
   HoaCF <- c(0,rep((hoamonthly*12),HoldPeriod))
   ToteCF <- PMFCF + LCCF + InsCF + MaCeCF + TaxCF + HoaCF
   IncCF <- GICF - ToteCF
-  LoanPMT <- c(0,rep(pmt(IntRate/1200, Amort*12, -(ppval*(LTV/100))*(1+(Points/100)),0)*12,HoldPeriod))
-  LoanAMT <- c((ppval*(LTV/100))*(1+(Points/100)),fv(IntRate/1200, (1:HoldPeriod)*12, -(ppval*(LTV/100))*(1+(Points/100)), pmt(IntRate/1200, Amort*12, -(ppval*(LTV/100))*(1+(Points/100)),0)))
+  LoanPMT <- c(0,rep(FinCal::pmt(IntRate/1200, Amort*12, -(ppval*(LTV/100))*(1+(Points/100)),0)*12,HoldPeriod))
+  LoanAMT <- c((ppval*(LTV/100))*(1+(Points/100)),FinCal::fv(IntRate/1200, (1:HoldPeriod)*12, -(ppval*(LTV/100))*(1+(Points/100)), FinCal::pmt(IntRate/1200, Amort*12, -(ppval*(LTV/100))*(1+(Points/100)),0)))
   LevCF <- c(-TotInv + LoanAMT[1], IncCF[2:HoldPeriod] - LoanPMT[2:HoldPeriod], (PropVal[HoldPeriod+1]*(1-(SaleCC/100)))+IncCF[(HoldPeriod+1)] - LoanPMT[(HoldPeriod+1)] - LoanAMT[(HoldPeriod+1)])
   
   rnames <- c("Rent" , "Vacancy" , "Delinquency" , "Gross Income" , "Property Management Fee" , "Leasing Commission" , "Insurance" , "Maintenance/CapEx" , "Property Tax" , "HOA" , "Total Expenses" , "Income" , "Property Value" , "Outstanding Loan Balance" , "Loan Payment" , "Levered Cash Flow")
@@ -33,8 +30,6 @@ CFReturnTable <- function(RentAmt, RentAppRate, ValAppRate, TurnTime, ATenStay, 
   
   colnames(cfdatatable1) <- cnames
   
-  
-  htmltools_value(regulartable(cfdatatable1))
+  flextable::htmltools_value(flextable::regulartable(cfdatatable1))
   
 }
-
